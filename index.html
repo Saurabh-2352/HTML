@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="../test/style.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="module" src="./test/script.js"></script>
+  </head>
+  <body style="background-color: #10403B">
+    <div class="container">
+      <div style="min-height: 100vh" class="row w-100 align-items-center">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="login-form px-5 py-5 bg-white rounded">
+            <h4 class="text-dark text-center">Login</h4>
+            <form id="form" action="#">
+              <div class="form-field mt-2">
+                <label for="fname"
+                  ><span class="text-danger">*</span>First name:</label
+                ><br />
+                <input class="p-2 w-100 rounded border-1" type="text" id="fname" name="fname" oninput="onInput(this)"/>
+                <div id="fname-error" class="error"></div>
+              </div>
+              <div class="form-field mt-2">
+                <label for="lname"
+                  ><span class="text-danger">*</span>Last name:</label
+                ><br />
+                <input class="p-2 w-100 rounded border-1" type="text" id="lname" name="lname" oninput="onInput(this)"/>
+                <div id="lname-error" class="error"></div>
+              </div>
+              <div class="form-field mt-2">
+                <label for="email"
+                  ><span class="text-danger">*</span>Email:</label
+                ><br />
+                <input class="p-2 w-100 rounded border-1" type="email" id="email" name="email" oninput="onInput(this)"/>
+                <div id="email-error" class="error"></div>
+              </div>
+              <div class="form-field mt-2">
+                <label for="dob"
+                  ><span class="text-danger">*</span>Date of Birth:</label
+                ><br/>
+                <input class="p-2 w-100 rounded border-1" type="date" id="dob" name="dob" />
+                <div id="dob-error" class="error"></div>
+              </div>
+              <div class="form-field mt-2">
+                <label for="password"
+                  ><span class="text-danger">*</span>Password:</label
+                ><br/>
+                <input class="p-2 w-100 rounded border-1" type="password" id="password" name="password" oninput="onInput(this)"/>
+                <div id="password-error" class="error"></div>
+              </div>
+              <div class="form-field mt-2">
+                <label for="c-password">
+                  <span class="text-danger">*</span>Confirm Password:</label>
+                  <br/>
+                <input class="p-2 w-100 rounded border-1" type="password" id="c-password" name="c-password" oninput="onInput(this)"/>
+                <div id="c-password-error" class="error"></div>
+              </div>
+              <button class="btn-primary mt-3 px-3 py-2 w-100 rounded border-0" onclick="return showData()" type="button">Submit</button>
+              <button class="btn-primary mt-3 px-3 py-2 w-100 rounded border-0" onclick=" showList()" type="button">List</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <h1 id="heading"></h1>
+        </div>
+      </div>
+      <div id="data-list">
+      </div>
+    </div>
+    <script>
+    let m = new Map([
+      ["k1", "v1"],
+      ["k2", "v2"],
+      ["k3", "v3"]
+  ]);
+  console.log(m); 
+
+  function isGreaterThan5(element, index, array) {
+      return element > 5;
+  }
+
+
+  // Driver code
+  // Original array
+  let array = [2, 5, 8, 1, 4,];
+
+  // Checking for condition in array
+  let value = array.some(isGreaterThan5);
+
+  console.log(value);
+
+// Declare and initialize array
+let strArr = ["amit", "sumit", "anil"];
+
+// Delete two elements starting from index 1
+// and add three elements.
+strArr.splice(1, 2, "Geeks", "Geeks1", "Geeks2");
+
+        function showList(){
+      const nameObj = JSON.parse(localStorage.getItem("user"));
+      let targetElement=document.getElementById('data-list');
+      targetElement.innerHTML
+      
+      Object.keys(nameObj).forEach(key => {
+        targetElement.innerHTML+=nameObj[key] + "</br>"
+      });
+
+      // document.getElementById('data-list').innerHTML="",JSON.parse(nameObj);
+    }
+
+    function onInput(element) {
+      if (element.name == "fname") {
+        document.querySelector('#fname-error').textContent = element.value == "" ? "First name is required" : "";
+      } else if (element.name == "lname") {
+        document.querySelector('#lname-error').textContent = element.value == "" ? "Last name is required" : "";
+      } else if (element.name == "email") {
+        document.querySelector('#email-error').textContent = element.value == "" ? "Email is required" : "";
+      } else if (element.name == "password") {
+        document.querySelector('#password-error').textContent = element.value == "" ? "Password is required" : "";
+      } else if (element.name == "c-password") {
+        document.querySelector('#c-password-error').textContent = element.value == "" ? "Confirm Password is required" : "";
+      } 
+    }
+
+    function showData() {
+        const first_name= document.getElementById('fname').value
+        const last_name= document.getElementById('lname').value
+        const email_add= document.getElementById('email').value
+        const date_of_birth= document.getElementById('dob').value
+        const e_password= document.getElementById('password').value
+        const c_password= document.getElementById('c-password').value
+        const nameObj={
+            first_name:first_name,
+            last_name:last_name,
+            email:email_add,
+            date_of_birth:date_of_birth,
+            e_password:e_password,
+            c_password: c_password
+        }
+        // console.log(JSON.parse(JSON.stringify(nameObj)));
+        localStorage.setItem("user", JSON.stringify(nameObj));
+
+      
+        //-------------------------------------------------------------------------------------
+        if (validateForm()) {
+        // Save to localStorage
+        let userArray = JSON.parse(localStorage.getItem("userArray")) || [];
+        userArray.push(nameObj);
+        localStorage.setItem("userArray", JSON.stringify(userArray));
+
+        console.log("Data stored successfully!", userArray);
+
+        // Clear the form
+        clearForm();
+
+        // Refill the form with the last saved entry
+        refillForm(nameObj);
+      }
+
+
+      function clearForm() {
+      document.getElementById('fname').value = '';
+      document.getElementById('lname').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('dob').value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('c-password').value = '';
+
+      // Clear error messages
+      document.getElementById('fname-error').textContent = '';
+      document.getElementById('lname-error').textContent = '';
+      document.getElementById('email-error').textContent = '';
+      document.getElementById('dob-error').textContent = '';
+      document.getElementById('password-error').textContent = '';
+      document.getElementById('c-password-error').textContent = '';
+      }
+
+      function refillForm(nameObj) {
+      document.getElementById('fname').value = nameObj.first_name;
+      document.getElementById('lname').value = nameObj.last_name;
+      document.getElementById('email').value = nameObj.email;
+      document.getElementById('dob').value = nameObj.date_of_birth;
+      document.getElementById('password').value = nameObj.e_password;
+      document.getElementById('c-password').value = nameObj.c_password;
+      }
+
+        //-------------------------------------------------------------------------------------
+
+
+        if(validateForm()){
+            // Log the values of each field to the console
+            const firstNameInput = document.getElementById('fname');
+            const lastNameInput = document.getElementById('lname');
+            const emailInput = document.getElementById('email');
+            const dobInput = document.getElementById('dob');
+            const passwordInput = document.getElementById('password');
+            const cPasswordInput = document.getElementById('c-password');
+            console.log("First Name:", firstNameInput.value);
+            console.log("Last Name:", lastNameInput.value);
+            console.log("Email:", emailInput.value);
+            console.log("Date of Birth:", dobInput.value);
+            console.log("Password:", passwordInput.value);
+            console.log("Confirm Password:", cPasswordInput.value);
+        }                                                                                     
+}
+
+function validData(id, val){
+
+}
+    function validateForm() {
+    const firstNameInput = document.getElementById('fname');
+    const firstNameErrorElement = document.getElementById('fname-error');
+    const lastNameInput = document.getElementById('lname');
+    const lastNameErrorElement = document.getElementById('lname-error');
+    const emailInput = document.getElementById('email');
+    const emailErrorElement = document.getElementById('email-error');
+    const dobInput = document.getElementById('dob');
+    const dobErrorElement = document.getElementById('dob-error');
+    const passwordInput = document.getElementById('password');
+    const passwordErrorElement = document.getElementById('password-error');
+    const cPasswordInput = document.getElementById('c-password');
+    const cPasswordErrorElement = document.getElementById('c-password-error');
+
+    const nameRegex = /^[A-Za-z]+$/; // Regex for alphabetic characters only
+
+    // Clear previous error messages
+    firstNameErrorElement.textContent = 'okk';
+    lastNameErrorElement.textContent = '';
+    emailErrorElement.textContent = '';
+    dobErrorElement.textContent = '';
+    passwordErrorElement.textContent = '';
+    cPasswordErrorElement.textContent = '';
+
+    let isValid = true;
+
+    if ((firstNameInput.value.length <5)) {
+        firstNameErrorElement.textContent = 'First name must greater than 10.';
+        firstNameErrorElement.style.color = 'red';
+        isValid = false;        
+    } 
+    // else {
+    // firstNameErrorElement.textContent = 'Valid';  // Clear any previous error message
+    // firstNameErrorElement.style.color = 'green';
+    // }
+
+    if ((lastNameInput.value.length <5)) {
+        lastNameErrorElement.textContent = 'First name must greater than 10.';
+        lastNameErrorElement.style.color = 'red';
+        isValid = false;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(emailInput.value)) {
+        emailErrorElement.textContent = 'Please enter a valid email address.';
+        emailErrorElement.style.color = 'red';
+        isValid = false;
+    }
+    
+    const dobValue = new Date(dobInput.value);
+    const age = calculateAge(dobValue);
+    if (age >= 18) {
+        dobErrorElement.textContent = 'Valid Age (18 or older)';
+        dobErrorElement.style.color = 'green';
+    } else {
+        dobErrorElement.textContent = 'You must be at least 18 years old.';
+        dobErrorElement.style.color = 'red';
+        isValid = false;
+    }
+
+    // Calculate age from Date of Birth
+    function calculateAge(dob) {
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    if (passwordInput.value.length < 6) {
+        passwordErrorElement.textContent = 'Password must be at least 6 characters long.';
+        passwordErrorElement.style.color = 'red';
+        isValid = false;
+    }
+
+    if (passwordInput.value !== cPasswordInput.value) {
+        cPasswordErrorElement.textContent = 'Passwords do not match.';
+        cPasswordErrorElement.style.color = 'red';
+        isValid = false;
+    }
+
+    return isValid; // Prevent form submission if validation fails
+      
+}
+
+    </script>
+  </body>
+</html>
